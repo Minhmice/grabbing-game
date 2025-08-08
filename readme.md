@@ -30,90 +30,116 @@ pip install pygame pyserial
 
 # 3. Mở game
 python main.py
-💡 Không có Arduino? Không sao cả! Vẫn chơi bằng bàn phím mượt như sáp.
+````
 
-🕹️ Controls
-✋ Người chơi 1 (BLUE):
-Hành động	Phím
-Tiến/lùi	W / S
-Trái/phải	A / D
-Xoay	Q / E
-Chụp item	F
-Sẵn sàng	LSHIFT
+> 💡 **Không có Arduino?** Không sao cả! Vẫn chơi bằng bàn phím mượt như sáp.
 
-🔥 Người chơi 2 (RED):
-Hành động	Phím
-Tiến/lùi	↑ / ↓
-Trái/phải	← / →
-Xoay	NumPad 4 / 6
-Chụp item	M
-Sẵn sàng	RSHIFT
+---
 
-🎛️ Có dùng Arduino thì game auto đọc giá trị joystick và nút bấm.
-Dữ liệu truyền từ serial như: x,y,rot,... → được map tốc độ/movement xịn xò.
+## 🕹️ Controls
 
-🧠 Gameplay cơ bản
-Vào menu, mỗi người ấn Ready (phím hoặc nút Arduino)
+### ✋ Người chơi 1 (BLUE):
 
-Game countdown 3 giây → bắt đầu chơi
+| Hành động | Phím   |
+| --------- | ------ |
+| Tiến/lùi  | W / S  |
+| Trái/phải | A / D  |
+| Xoay      | Q / E  |
+| Chụp item | F      |
+| Sẵn sàng  | LSHIFT |
 
-Nhặt item → chụp bằng gripper → thả vào basket bên mình
+### 🔥 Người chơi 2 (RED):
 
-Sau 60 giây: Game Over, điểm tổng được gửi lên scoreboard server.
+| Hành động | Phím         |
+| --------- | ------------ |
+| Tiến/lùi  | ↑ / ↓        |
+| Trái/phải | ← / →        |
+| Xoay      | NumPad 4 / 6 |
+| Chụp item | M            |
+| Sẵn sàng  | RSHIFT       |
 
-🧱 Tính năng chất chơi người dơi
-✅ Chơi full màn hình, scale auto mọi kích thước
+> 🎛️ **Có dùng Arduino** thì game auto đọc giá trị joystick và nút bấm.
+> Dữ liệu truyền từ serial như: `x,y,rot,...` → được map tốc độ/movement xịn xò.
 
-🎮 Điều khiển qua bàn phím hoặc Arduino (có code đọc serial luôn)
+---
 
-🧲 Gripper "hút đồ" cực bén – pick & drop không trượt phát nào
+## 🧠 Gameplay cơ bản
 
-🧠 AI-free, code 100% tay người – dễ debug, dễ mod
+1. Vào menu, mỗi người **ấn Ready** (phím hoặc nút Arduino)
+2. Game **countdown 3 giây** → bắt đầu chơi
+3. Nhặt item → chụp bằng gripper → thả vào basket bên mình
+4. Sau 60 giây: **Game Over**, điểm tổng được gửi lên scoreboard server.
 
-🌐 Server TCP có sẵn để gửi điểm số sang scoreboard UI
+---
 
-🖼 Giao diện siêu yêu
-Có background pool cute
+## 🧱 Tính năng chất chơi người dơi
 
-Countdown khổng lồ trước khi bắt đầu
+* ✅ Chơi full màn hình, scale auto mọi kích thước
+* 🎮 Điều khiển qua bàn phím hoặc Arduino (có code đọc serial luôn)
+* 🧲 Gripper "hút đồ" cực bén – pick & drop không trượt phát nào
+* 🧠 AI-free, code 100% tay người – dễ debug, dễ mod
+* 🌐 Server TCP có sẵn để gửi điểm số sang scoreboard UI
 
-Mỗi player có avatar, rổ riêng, điểm riêng
+---
 
-Font nét căng, màu rõ ràng – nhìn phát hiểu luôn ai thắng
+## 🖼 Giao diện siêu yêu
 
-🧪 Arduino Setup (tuỳ chọn)
-py
-Copy
-Edit
+* Có background pool cute
+* Countdown khổng lồ trước khi bắt đầu
+* Mỗi player có avatar, rổ riêng, điểm riêng
+* Font nét căng, màu rõ ràng – nhìn phát hiểu luôn ai thắng
+
+---
+
+## 🧪 Arduino Setup (tuỳ chọn)
+
+```py
 ARDUINO_SERIAL_PORT = 'COM3'  # đổi nếu khác
 ARDUINO_BAUD_RATE = 115200
+```
+
 Code đọc serial đã viết sẵn:
 
-py
-Copy
-Edit
+```py
 def read_arduino_data():
     line = ser.readline().decode('utf-8').strip()
     ...
-⚠️ Không tìm thấy cổng? Tool sẽ chạy không Arduino. Không vấn đề.
+```
 
-🔄 Flow Game
-css
-Copy
-Edit
+> ⚠️ Không tìm thấy cổng? Tool sẽ chạy không Arduino. Không vấn đề.
+
+---
+
+## 🔄 Flow Game
+
+```
 Main Menu → Ready → Countdown → 60s Gameplay → Game Over → Gửi điểm
-🛠 Khó chịu? Gỡ liền tay
-Vấn đề	Giải pháp
-Không kết nối Arduino	Kiểm tra COM port đúng chưa
-Không thấy item spawn	Chờ 2s hoặc kiểm tra ITEM_SPAWN_INTERVAL
-Countdown lỗi	Check COUNTDOWN_TIME và get_time_ms()
-Không gửi được điểm	Kiểm tra server có chạy chưa, cổng 12345
+```
 
-🧼 Clean restart?
+---
+
+## 🛠 Khó chịu? Gỡ liền tay
+
+| Vấn đề                | Giải pháp                                  |
+| --------------------- | ------------------------------------------ |
+| Không kết nối Arduino | Kiểm tra COM port đúng chưa                |
+| Không thấy item spawn | Chờ 2s hoặc kiểm tra `ITEM_SPAWN_INTERVAL` |
+| Countdown lỗi         | Check `COUNTDOWN_TIME` và `get_time_ms()`  |
+| Không gửi được điểm   | Kiểm tra server có chạy chưa, cổng 12345   |
+
+---
+
+## 🧼 Clean restart?
+
 Nhấn ESC bất kỳ lúc nào để thoát game an toàn và đóng serial nếu đang mở.
 
-❤️ Made với tất cả sự cay cú
-Viết ra game này vì mấy trò chơi bây giờ không có cảm giác nữa.
-Chơi Grabbing Game không cần nhiều não – chỉ cần trái tim và 2 ngón tay thần tốc.
+---
 
-<p align="center"><strong>💻 Coded by <span style='color:#f40;'>bạn dev buồn ngủ</span> – nhưng vẫn gõ đến dòng cuối cùng</strong></p> <p align="center"><i>Chúc bạn thắng thật to, nhưng quan trọng hơn là... vui 😎</i></p>
+## ❤️ Made với tất cả sự cay cú
+
+> Viết ra game này vì mấy trò chơi bây giờ không có cảm giác nữa.
+> Chơi Grabbing Game không cần nhiều não – chỉ cần trái tim và 2 ngón tay thần tốc.
+
+<p align="center"><strong>💻 Coded by <span style='color:#f40;'>bạn dev buồn ngủ</span> – nhưng vẫn gõ đến dòng cuối cùng</strong></p>
+
+<p align="center"><i>Chúc bạn thắng thật to, nhưng quan trọng hơn là... vui 😎</i></p>
