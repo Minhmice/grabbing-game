@@ -22,7 +22,7 @@ Bàn phím chiến ổn. Có Arduino càng chill. Có cả server gửi điểm 
 
 ```bash
 # 1. Clone repo
-git clone https://github.com/your-name/grabbing-game.git
+git clone https://github.com/Minhmice/grabbing-game.git
 cd grabbing-game
 
 # 2. Cài Python packages (nếu chưa có)
@@ -143,3 +143,4 @@ Nhấn ESC bất kỳ lúc nào để thoát game an toàn và đóng serial n�
 <p align="center"><strong>💻 Coded by <span style='color:#f40;'>bạn dev buồn ngủ</span> – nhưng vẫn gõ đến dòng cuối cùng</strong></p>
 
 <p align="center"><i>Chúc bạn thắng thật to, nhưng quan trọng hơn là... vui 😎</i></p>
+
